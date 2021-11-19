@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Util {
-    // реализуйте настройку соеденения с БД
+    // реализуйте настройку соеденения с БД через JDBC
     private static final String URL = "jdbc:mysql://localhost:3306/mytestdb";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
