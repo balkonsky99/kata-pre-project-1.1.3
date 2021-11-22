@@ -2,16 +2,14 @@ package jm.task.core.jdbc.model;
 
 import jm.task.core.jdbc.util.Util;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Persistence;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@Table
+@Entity
+@Table(name = "users")
 public class User {
     @Id
     private Long id;
