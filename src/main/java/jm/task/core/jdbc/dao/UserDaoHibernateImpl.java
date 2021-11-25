@@ -5,7 +5,6 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
 import java.sql.SQLException;
 import java.util.List;
 

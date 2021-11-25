@@ -16,16 +16,15 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public void createUsersTable() throws SQLException {
         Connection connection = getConnection();
 
-        String query = "CREATE TABLE IF NOT EXISTS users " +
-                "(id BIGINT NOT NULL AUTO_INCREMENT, " +
-                "name VARCHAR(90) NULL, " +
-                "lastName VARCHAR(90) NULL, " +
-                "age TINYINT NULL, " +
-                "PRIMARY KEY (`id`), " +
-                "UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)";
-
         try {
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement(
+                    "CREATE TABLE IF NOT EXISTS users " +
+                    "(id BIGINT NOT NULL AUTO_INCREMENT, " +
+                    "name VARCHAR(90) NULL, " +
+                    "lastName VARCHAR(90) NULL, " +
+                    "age TINYINT NULL, " +
+                    "PRIMARY KEY (`id`), " +
+                    "UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)");
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,9 +42,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public void dropUsersTable() throws SQLException {
         Connection connection = getConnection();
 
-        String query = "DROP TABLE IF EXISTS users";
         try {
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement("DROP TABLE IF EXISTS users");
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,10 +61,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public void saveUser(String name, String lastName, byte age) throws SQLException {
         Connection connection = getConnection();
 
-        String query = "INSERT INTO users (name, lastName, age) VALUES(?,?,?)";
-
         try {
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement("INSERT INTO users (name, lastName, age) VALUES(?,?,?)");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
@@ -89,10 +85,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public void removeUserById(long id) throws SQLException {
         Connection connection = getConnection();
 
-        String query = "DELETE FROM users WHERE id = ?";
-
         try {
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
             preparedStatement.setLong(1, id);
 
             preparedStatement.executeUpdate();
@@ -114,11 +108,9 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
         List<User> userList = new ArrayList<>();
 
-        String query = "SELECT id, name, lastName, age FROM users";
-
         try {
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
+            ResultSet resultSet = statement.executeQuery("SELECT id, name, lastName, age FROM users");
 
             while(resultSet.next()) {
                 User user = new User();
@@ -147,10 +139,8 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public void cleanUsersTable() throws SQLException {
         Connection connection = getConnection();
 
-        String query = "TRUNCATE TABLE users";
-
         try {
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement("TRUNCATE TABLE users");
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
